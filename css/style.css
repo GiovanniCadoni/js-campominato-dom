@@ -59,3 +59,7 @@ main{
 .ms_bg-light{
     background-color:aqua;
 }
+
+.ms_bg-red{
+    background-color: darkred;
+}
