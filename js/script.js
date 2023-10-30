@@ -7,6 +7,8 @@ console.log(btnStart);
 
 let clickedCells = 0;
 
+let max;
+
 let maxClicks;
 
 let bombCell = [];
@@ -21,9 +23,10 @@ function makeGrid() {
     console.log(difficult);
 
     if (difficult === 1) {
-        let max = 100;
+        max = 100;
         bombCell = generateBomb(max);
         console.log(bombCell);
+        square.innerHTML = "";
 
         for (let i = 0; i < max; i++) {
             let number = i + 1;
@@ -37,9 +40,11 @@ function makeGrid() {
         }
 
     } else if (difficult === 2) {
-        let max = 81;
+        max = 81;
         bombCell = generateBomb(max);
         console.log(bombCell);
+
+        square.innerHTML = "";
 
         for (let i = 0; i < max; i++) {
             number = i + 1;
@@ -53,10 +58,11 @@ function makeGrid() {
         }
 
     } else if (difficult === 3) {
-        let max = 49;
+        max = 49;
         bombCell = generateBomb(max);
         console.log(bombCell);
 
+        square.innerHTML = "";
         for (let i = 0; i < max; i++) {
             number = i + 1;
 
@@ -98,6 +104,13 @@ function generateCell49(number) {
 function cellCheck() {
     if (bombCell.includes(parseInt(this.innerText))) {
         this.classList.add("ms_bg-red");
+        for(i = 0; i < max; i++)
+        {
+            if(this[i].includes(bombCell))
+            {
+                this.classList.add("ms_bg-red");
+            }
+        }
     } else {
         this.classList.add("ms_bg-light");
         clickedCells++;
