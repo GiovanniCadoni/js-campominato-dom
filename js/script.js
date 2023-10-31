@@ -5,7 +5,7 @@ console.log(square);
 const btnStart = document.getElementById("start");
 console.log(btnStart);
 
-let clickedCells = 0;
+let clickedCells = [];
 
 let max;
 
@@ -81,40 +81,76 @@ function makeGrid() {
 //Funzioni per creare i tipi di celle
 function generateCell100(number) {
     const newCell = document.createElement("button");
-    newCell.classList.add("ms_square-100");
+    newCell.classList.add("cellSingle","ms_square-100");
     newCell.innerHTML = number;
     return newCell;
 }
 
 function generateCell81(number) {
     const newCell = document.createElement("button");
-    newCell.classList.add("ms_square-81");
+    newCell.classList.add("cellSingle","ms_square-81");
     newCell.innerHTML = number;
     return newCell;
 }
 
 function generateCell49(number) {
     const newCell = document.createElement("button");
-    newCell.classList.add("ms_square-49");
+    newCell.classList.add("cellSingle", "ms_square-49");
     newCell.innerHTML = number;
     return newCell;
 }
 
-//Funzione che colora le celle cliccate
+//Funzione che controlla e verifica le celle cliccate
 function cellCheck() {
-    if (bombCell.includes(parseInt(this.innerText))) {
+    const clickedNumber = parseInt(this.innerText);
+    if (bombCell.includes(clickedNumber)) {
         this.classList.add("ms_bg-red");
-        for(i = 0; i < max; i++)
-        {
-            if(this[i].includes(bombCell))
-            {
-                this.classList.add("ms_bg-red");
-            }
-        }
+        endGame("loose");
     } else {
         this.classList.add("ms_bg-light");
-        clickedCells++;
+        if(!clickedCells.includes(clickedNumber))
+        {
+            console.log("Conto questo numero");
+            clickedCells.push(clickedNumber);
+        }
+        if(clickedCells.length === max)
+        {
+            endGame("win");
+        }
     };
+}
+
+function endGame (result)
+{
+    const resultTitle = document.getElementById("result");
+    resultTitle.innerHTML = "Il tuo punteggio e\' " + clickedCells.length;
+    resultTitle.classList.remove("d-none");
+
+    const allCells = document.querySelectorAll("cellSingle");
+    for(let i = 0; i < allCells.length; i++)
+    {
+        const curCell = allCells[i];
+        curCell.removeEventListener("click", cellCheck);
+        //curCell.style.pointerEvents = "none";
+    }
+
+    if(result === "loose")
+    {
+        for(let i = 0; i < allCells.length; i++)
+        {
+            const curCell = allCells[i];
+            const curNumber = parseInt(curCell.textContent);
+            if(bombs.includes(curNumber))
+            {
+                curCell.classList.add("ms_bg-red");
+            }
+        }
+        console.log("HAI PERSO!");
+    } else
+    {
+        console.log("HAI VINTO!");
+    }
+    
 }
 
 function getRndInteger(min, max) {
