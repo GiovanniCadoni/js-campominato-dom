@@ -4,7 +4,7 @@
 L'utente clicca su un bottone che genererà una griglia di gioco quadrata.
 Ogni cella ha un numero progressivo, da 1 a 100.
 Ci saranno quindi 10 caselle per ognuna delle 10 righe.
-Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro ed emetto un messaggio in console con il numero della cella cliccata.
+Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro se è libera, altrimenti si colora di rosso e il gioco finisce.
 
 Aggiungere una select accanto al bottone di generazione, che fornisca una scelta tra tre diversi livelli di difficoltà:
 - con difficoltà 1 => 100 caselle, con un numero compreso tra 1 e 100, divise in 10 caselle per 10 righe;
@@ -20,4 +20,7 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 3. Dichiariamo come variabili globali il tipo di select scelto dall'utente e il bottone che farà partire la creazione della griglia
 4. Impostiamo al click sul bottone la chiamata alla funzione che si occupa della creazione della griglia.
 5. Controlliamo la difficolta scelta per comprendere il numero di celle da creare.
-6. Inoltre inseriamo in ogni singola cella la possibilita che ogni volta che venga cliccata cambi colore e appaia in console il numero all'interno di essa.
+6. Inoltre inseriamo in ogni singola cella la possibilita che ogni volta che venga cliccata cambi colore:
+- Se il numero della cella cliccata non rientra nell'array dei numeri assegnati alle bombe, la cella si colora di celeste e si continua il gioco.
+- Se invece il numero appartiene all'array di bombe la cella si colora di rosso e il gioco finisce.
+7. Stampare il numero di celle cliccate, sia in caso di vittoria che di sconfitta.
